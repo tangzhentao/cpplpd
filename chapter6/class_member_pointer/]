@@ -1,0 +1,37 @@
+/*
+ * 通过练习熟悉指向类成员的指针
+ */
+#include <iostream>
+
+using namespace std;
+
+class foo
+{
+	public:
+		int data1;
+		int data2;
+
+		void print ()
+		{
+			cout << "data1: " << data1 << ", data2: " << endl;
+		}
+
+	private:
+		int data3;
+};
+
+int main()
+{
+	foo f;
+	int foo::* dataPtr;
+	dataPtr = &foo::data1;
+	cout << "dataPtr: " << dataPtr << endl;
+	cout << "f.*dataPtr: " << f.*dataPtr << endl;
+	
+	int foo::*data2Ptr;
+	data2Ptr = &foo::data2;
+	cout << "data2Ptr: " << data2Ptr << endl;
+	cout << "f.*data2Ptr: " << f.*data2Ptr << endl;
+
+	return 0;
+}
