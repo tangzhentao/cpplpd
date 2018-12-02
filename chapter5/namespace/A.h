@@ -1,14 +1,11 @@
 /*
  * dd
  */
-
-
 #ifndef A_H
 #define A_H
 
 #include <iostream>
 
-int in = 2;
 class A
 {
 	public:
