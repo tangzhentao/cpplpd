@@ -10,8 +10,9 @@ using namespace std;
 int main()
 {
 	A a;
-	a.print();
 	a.log();
-	cout << "hello" << endl;
+
+	B b;
+	b.log();
 	return 0;
 }

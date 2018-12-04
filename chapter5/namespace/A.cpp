@@ -3,8 +3,11 @@
  */
 #include "A.h"
 
+namespace {
+	int num = 100;
+}
 
 void A::log ()
 {
-	printf("log: i = %d\n", 99);
+	printf("log: num  = %d\n", num);
 }

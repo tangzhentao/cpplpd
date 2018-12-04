@@ -9,13 +9,7 @@
 class A
 {
 	public:
-		void print()
-		{
-			printf("print: i = %d\n", 9);
-		}
 		void log();
-
-		int i;
 };
 
 #endif

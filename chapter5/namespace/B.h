@@ -1,6 +1,7 @@
-#include "A.h"
+#include <iostream>
 
 class B
 {
-	A a;
+public:
+	void log();
 };
