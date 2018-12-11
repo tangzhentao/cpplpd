@@ -16,6 +16,11 @@ class Array
 		T &operator [](int i);
 		// 数组下标运算符重载，针对const类型的重载
 		const T &operator [](int i) const;
+		// 赋值运算符重载
+		Array &operator = (const Array &right);
+		// 重载转换到“T *”的类型转换，是Array可以起到C++普通数组的作用
+		operator T *(); 
+		operator const T * ();
 
 		// 获取size
 		int getSize() const;
@@ -30,12 +35,14 @@ class Array
 template<class T>
 Array<T>::Array(int size): _size(size)
 {
+	cout << typeid(*this).name() << "::" << __func__ << endl;
 	_list = new T[_size];
 }
 
 template<class T>
 Array<T>::Array(const Array<T> &array)
 {
+	cout << typeid(*this).name() << "::" << __func__ << " copy" << endl;
 	// 申请空间
 	_size = array.getSize();
 	_list = new T[_size];
@@ -50,15 +57,17 @@ Array<T>::Array(const Array<T> &array)
 template<class T>
 Array<T>::~Array()
 {
+	cout << typeid(*this).name() << "::" << __func__ << endl;
 	delete[] _list;
 }
 
 template<class T>
 T & Array<T>::operator [](int i)
 {
-	if(i >= _size || i <= 0)
+	//cout << typeid(*this).name() << "::" << __func__ << endl;
+	if(i >= _size || i < 0)
 	{
-		cout << "index out of bounds: " << i << endl;
+		cout << "index(" << i << ")" << " out of bounds)" << _size << ")" << endl;
 		exit(1);
 	}
 
@@ -68,13 +77,53 @@ T & Array<T>::operator [](int i)
 template<class T>
 const T & Array<T>::operator [](int i) const
 {
-	if(i >= _size || i <= 0)
+	//cout << typeid(*this).name() << "::" << __func__ << " const" << endl;
+	if(i >= _size || i < 0)
 	{
-		cout << "index out of bounds: " << i << endl;
+		cout << "index(" << i << ")" << " out of bounds)" << _size << ")" << endl;
 		exit(1);
 	}
 
 	return *(_list+i);
+}
+
+template<class T>
+Array<T> &Array<T>::operator = (const Array<T> &right)
+{
+	cout << typeid(*this).name() << "::" << __func__ << endl;
+	// 检查right是不是自己
+	if (this != &right) 
+	{// 不是
+		// 检查right的size是否与自己的size相同
+		if (_size != right.getSize())
+		{// 不同,则删除现在分配的内存，重新申请内存
+			delete [] _list;
+			_size = right.getSize();
+			_list = new T[_size];
+		}
+
+		for (int i = 0; i < _size; i++)
+		{
+			*(_list+i) = right[i];
+		}
+	}
+
+	return *this;
+}
+
+template<class T>
+Array<T>::operator T * ()
+{
+	cout << typeid(*this).name() << "::" << __func__ << endl;
+	return _list;
+}
+
+template<class T>
+Array<T>::operator const T * ()
+{
+	
+	cout << typeid(*this).name() << "::" << __func__ << " const" << endl;
+	return _list;
 }
 
 template<class T>
