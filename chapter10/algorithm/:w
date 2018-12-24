@@ -1,0 +1,30 @@
+/*
+ * 例10-20
+ * 熟悉不可变序列算法
+ */
+#include <iostream>
+#include <vector>
+
+
+using namespace std;
+
+int main()
+{
+	int a[] = {0, 1, 2, 3, 4, 5, 6, 6, 7, 8};
+	vector<int> s(a, a + sizeof(a)/sizeof(int) );
+
+	int a1[] = {6, 6};
+	vector<int> s1(a1, a1 + sizeof(a1)/sizeof(int) );
+
+	int a2[] = {5, 6};
+	vector<int> s2(a2, a2 + sizeof(a2)/sizeof(int) );
+
+	int a3[] = {0, 1, 2, 3, 4, 5, 7, 7, 7, 8};
+	vector<int> s3(a3, a3 + sizeof(a3)/sizeof(int) );
+
+	cout << "找出s中相邻元素值相等的第一个元素" << endl;
+	cout << *adjacent_if(s.bengin(), s.end()) << endl;
+
+	cout << "hello" << endl;
+	return 0;
+}
